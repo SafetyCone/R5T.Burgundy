@@ -21,13 +21,23 @@ using R5T.Visigothia;
 using R5T.Visigothia.Default.Local;
 
 
-namespace R5T.Burgundy.Code.Extensions
+namespace R5T.Burgundy.Extensions
 {
     public static class ServiceCollectionExtensions
     {
+        /// <summary>
+        /// Adds services necessary to acquire an <see cref="SftpClientWrapper"/> instance configured using AWS EC2 secrets from the Rivet organization directory in Dropbox.
+        /// </summary>
         public static IServiceCollection UseSftpClientWrapper(this IServiceCollection services)
         {
             services
+                .AddSingleton<SftpClientWrapper>(serviceProvider =>
+                {
+                    var sftpClientWrapperProvider = serviceProvider.GetRequiredService<ISftpClientWrapperProvider>();
+
+                    var sftpClientWrapper = sftpClientWrapperProvider.GetSftpClientWrapper();
+                    return sftpClientWrapper;
+                })
                 .AddSingleton<ISftpClientWrapperProvider, FrisiaSftpClientWrapperProvider>()
                 .AddSingleton<IAwsEc2ServerSecretsProvider, SuebiaAwsEc2ServerSecretsProvider>()
                 .AddSingleton<IAwsEc2ServerSecretsFileNameProvider, HardCodedAwsEc2ServerSecretsFileNameProvider>()
@@ -46,9 +56,6 @@ namespace R5T.Burgundy.Code.Extensions
                 .AddSingleton<IUserProfileDirectoryPathProvider, DefaultLocalUserProfileDirectoryPathProvider>()
                 .AddSingleton<IOrganizationsStringlyTypedPathOperator, DefaultOrganizationsStringlyTypedPathOperator>()
                 .AddSingleton<IOrganizationDirectoryNameProvider, DefaultOrganizationDirectoryNameProvider>()
-
-
-                .BuildServiceProvider()
                 ;
 
             return services;
