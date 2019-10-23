@@ -31,7 +31,7 @@ namespace R5T.Burgundy.Extensions
         public static IServiceCollection UseSftpClientWrapper(this IServiceCollection services)
         {
             services
-                .AddSingleton<SftpClientWrapper>(serviceProvider =>
+                .AddTransient<SftpClientWrapper>(serviceProvider =>
                 {
                     var sftpClientWrapperProvider = serviceProvider.GetRequiredService<ISftpClientWrapperProvider>();
 
