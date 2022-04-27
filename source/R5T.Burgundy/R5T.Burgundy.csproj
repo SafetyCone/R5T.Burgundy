@@ -14,6 +14,7 @@
     <ProjectReference Include="..\..\..\R5T.Lombardy\source\R5T.Lombardy\R5T.Lombardy.csproj" />
     <ProjectReference Include="..\..\..\R5T.Pictia.Frisia\source\R5T.Pictia.Frisia\R5T.Pictia.Frisia.csproj" />
     <ProjectReference Include="..\..\..\R5T.Suebia.Alamania\source\R5T.Suebia.Alamania\R5T.Suebia.Alamania.csproj" />
+    <ProjectReference Include="..\..\..\R5T.Suebia.Default\source\R5T.Suebia.Default\R5T.Suebia.Default.csproj" />
     <ProjectReference Include="..\..\..\R5T.Visigothia.Default.Local\source\R5T.Visigothia.Default.Local\R5T.Visigothia.Default.Local.csproj" />
   </ItemGroup>
 </Project>
